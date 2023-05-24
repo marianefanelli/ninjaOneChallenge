@@ -1,0 +1,21 @@
+{
+  "name": "ninjaone",
+  "version": "1.0.0",
+  "description": "Challenge",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:chrome": "cypress run --browser chrome",
+    "cypress:headless": "cypress run --headless"
+  },
+  "keywords": [
+    "cypress",
+    "javascript"
+  ],
+  "author": "Mariane Fanelli",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "cypress": "^12.12.0"
+  }
+}

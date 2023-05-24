@@ -29,7 +29,7 @@ npm run cypress:chrome
 This script runs the tests through the Chrome browser
 
 ```
-npm run cypress:chrome
+npm run cypress:headless
 ```
 This script runs the tests in headless mode
 

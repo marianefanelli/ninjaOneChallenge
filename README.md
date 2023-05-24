@@ -1,4 +1,4 @@
-<h1 align="center">: Test - Ninja</h1>
+<h1 align="center"> Test - Ninja</h1>
 
 ## Description
 In this project you will find the implementation of test 1 offered by Ninja

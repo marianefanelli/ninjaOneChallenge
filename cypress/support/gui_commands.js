@@ -50,3 +50,28 @@ Cypress.Commands.add('verifyDeviceButtons', () => {
     })
   })
 })
+
+Cypress.Commands.add('createDeviceThroughUI', () => {
+  cy.visit(Cypress.env('webUrl'))
+  cy.get('a.submitButton').click()
+  cy.get('input#system_name').type('Mariane')
+  cy.get('select#type').select('MAC')
+  cy.get('input#hdd_capacity').type('250')
+  cy.get('button.submitButton').click()
+
+  // Locate device based on device name
+  cy.contains('div.device-info', 'Mariane').each((device) => {
+    cy.wrap(device).within(() => {
+      cy.get('span.device-name').should('contain.text', 'Mariane')
+      cy.get('span.device-type').should('contain.text', 'MAC')
+      cy.get('span.device-capacity').should('contain.text', '250')
+    })
+  })
+
+  // Clear data
+  cy.contains('.device-info', 'Mariane').closest('.device-main-box').within(() => {
+    cy.get('.device-options').within(() => {
+      cy.contains('button', 'Remove').click()
+    })
+  })
+})

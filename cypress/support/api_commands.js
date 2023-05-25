@@ -67,3 +67,27 @@ Cypress.Commands.add('compareDeviceLists', () => {
   })
 })
 
+Cypress.Commands.add('createDeviceByApi', () => {
+  return cy.fixture('newDevices-data').then((device) => {
+    return cy.request('POST', Cypress.env('apiUrl') + 'devices', device)
+      .then(response => {
+        expect(response.status).to.equal(200)
+        return response.body.id
+      })
+  })
+})
+
+Cypress.Commands.add('getLastId', () => {
+  return cy.request('GET', Cypress.env('apiUrl') + 'devices')
+    .then(response => {
+      const devices = response.body
+      return devices[devices.length - 1].id
+    })
+})
+
+Cypress.Commands.add('deleteById', (id) => {
+  return cy.request('DELETE', `${Cypress.env('apiUrl')}devices/${id}`)
+    .then(response => {
+      expect(response.status).to.equal(200)
+    })
+})

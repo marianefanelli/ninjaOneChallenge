@@ -1,7 +1,7 @@
 <h1 align="center"> Test - Ninja</h1>
 
 ## Description
-In this project you will find the implementation of test 1 offered by Ninja
+In this project you will find the implementation of challenge offered by Ninja
 
 ## What do you need to get started?
 * Start the server on port 3000
@@ -36,6 +36,7 @@ This script runs the tests in headless mode
 ## Project Organization
 * cypress/e2e: Folder that contains the files with the test scenarios
 * cypress/support: Folder containing files with custom commands used in tests and support configuration files
+* cypress/fixtures: Folder that contains the file with the data used in the tests
 
 
 ## Thank you!

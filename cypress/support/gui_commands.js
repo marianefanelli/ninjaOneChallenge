@@ -54,22 +54,27 @@ Cypress.Commands.add('verifyDeviceButtons', () => {
 Cypress.Commands.add('createDeviceThroughUI', () => {
   cy.visit(Cypress.env('webUrl'))
   cy.get('a.submitButton').click()
-  cy.get('input#system_name').type('Mariane')
-  cy.get('select#type').select('MAC')
-  cy.get('input#hdd_capacity').type('250')
-  cy.get('button.submitButton').click()
+  cy.fixture('newDevices-data').then((device) => {
+    cy.get('input#system_name').type(device.system_name)
+    cy.get('select#type').select(device.type)
+    cy.get('input#hdd_capacity').type(device.capacity)
+    cy.get('button.submitButton').click()
+  })
+})
 
-  // Locate device based on device name
-  cy.contains('div.device-info', 'Mariane').each((device) => {
+Cypress.Commands.add('validateDataByName', (deviceName, deviceType, deviceCapacity) => {
+  // Locate device based on device name and validate the values
+  cy.contains('div.device-info', deviceName).each((device) => {
     cy.wrap(device).within(() => {
-      cy.get('span.device-name').should('contain.text', 'Mariane')
-      cy.get('span.device-type').should('contain.text', 'MAC')
-      cy.get('span.device-capacity').should('contain.text', '250')
+      cy.get('span.device-name').should('contain.text', deviceName)
+      cy.get('span.device-type').should('contain.text', deviceType)
+      cy.get('span.device-capacity').should('contain.text', deviceCapacity)
     })
   })
+})
 
-  // Clear data
-  cy.contains('.device-info', 'Mariane').closest('.device-main-box').within(() => {
+Cypress.Commands.add('deleteDeviceByName', (deviceName) => {
+  cy.contains('.device-info', deviceName).closest('.device-main-box').within(() => {
     cy.get('.device-options').within(() => {
       cy.contains('button', 'Remove').click()
     })
